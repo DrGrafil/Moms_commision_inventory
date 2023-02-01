@@ -1,11 +1,10 @@
-from Inventory import Inventory
+from Inventory_Item import Inventory_Item
 
 
+def write_latex(all_inventory: [Inventory_Item]) -> bool:
+    for item in all_inventory:
+        print(item.image_url)
+        #urllib.request.urlretrieve()
 
-def write_latex(inventory: Inventory) -> bool:
-
-        #open file
-
-        for item in inventory.
-
+    return True
 
