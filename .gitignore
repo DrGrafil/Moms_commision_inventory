@@ -130,7 +130,3 @@ dmypy.json
 inventory.csv
 *.jpg
 *.png
-*.tex
-*.gz
-*.aux
-*.pdf
