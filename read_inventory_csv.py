@@ -2,9 +2,8 @@ import csv
 from Inventory_Item import Inventory_Item
 
 
-
 def read_inventory_csv() ->[Inventory_Item]:
-    all_inventory:[Inventory_Item] = []
+    all_inventory: [Inventory_Item] = []
     with open('inventory.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
