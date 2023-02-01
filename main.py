@@ -9,8 +9,6 @@ def main():
     write_latex(inventory)
 
 
-
-
 if __name__ == "__main__":
 
     main()
