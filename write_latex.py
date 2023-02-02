@@ -21,7 +21,20 @@ def write_latex(all_inventory: [Inventory_Item]) -> bool:
         f.write('\\usepackage[margin=0.5in]{geometry}\n')
         f.write('\\usepackage{multirow}\n')
         f.write('\\usepackage{graphicx}\n')
+        f.write('\\usepackage{fancyhdr}\n')
+
+        f.write('\\pagestyle{fancy}\n')
+        f.write('\\fancyhf{}\n')
+        f.write('\\fancyfoot[R]{\\thepage}\n')
+
+        f.write('\\setlength{\\voffset}{-0.75in}\n')
+
+        f.write('\\date{\\today}\n')
+        f.write('\\author{Elliot M Grafil}\n')
+        f.write('\\title{Summary of The Real Real Sales}\n')
+
         f.write('\\begin{document}\n')
+        f.write('\\maketitle\n')
 
         item_counter = 0
         for item in all_inventory:
@@ -29,11 +42,11 @@ def write_latex(all_inventory: [Inventory_Item]) -> bool:
             f.write('\n')
             f.write('\\begin{table}[]\n')
             f.write('\\begin{tabular}{llllllll}\n')
-            f.write('\\multicolumn{8}{l}{' + item.name.replace("&", "\\&") + '}\\\\ \n')
+            f.write('\\multicolumn{8}{l}{\\textbf{' + item.name.replace("&", "\\&") + '}}\\\\ \n')
             f.write('\\hline \\\\\n')
             f.write('\\multirow{3}{*}{\\includegraphics[width=3.5cm, height=3.5cm]{./../' + item.image_location + '}} & Price & Commission Rate & Commission Amount & Recieved & Sale \\\\ \n')
             f.write(' & ' + item.price + ' & ' + item.commission_rate + ' & ' + item.commission_amount + ' & ' + item.received_date + ' & ' + item.sale_date + ' \\\\ \n')
-            f.write(' & \\multicolumn{7}{l}{\\multirow{2}{*}{' + item.description.replace("&", "\\&")  + '}} \\\\ \n') #item.description
+            f.write(' & \\multicolumn{7}{l}{\\multirow{2}{*}{\\parbox[t]{15cm}{\\small ' + item.description.replace("&", "\\&") + '}}} \\\\ \n')
             f.write('\\end{tabular}\n')
             f.write('\\end{table}\n')
 
@@ -60,25 +73,24 @@ def write_latex(all_inventory: [Inventory_Item]) -> bool:
 
         f.write('\n\\clearpage\n')
         f.write('\n')
-        f.write('\\begin{center}\n')
         f.write('\\begin{table}[]\n')
+        f.write('\\centering\n')
         f.write('\\begin{tabular}{|lllll|}\n')
-        f.write('\\hline\\\\ \n')
+        f.write('\\hline \n')
         f.write('Year & Price & Commission Amount & Price-Commission Amount & Item Count \\\\ \n')
         f.write('\\hline \n')
 
         final_tally = (0, 0, 0, 0)
         for year_total in total_per_year.items():
             total = year_total[1]
-            f.write(str(year_total[0]) + ' & ' + str(round(total[0], 2)) + ' & ' + str(round(total[1], 2)) + ' & ' + str(round(total[2], 2)) + ' & ' + str(round(total[3], 2)) + ' \\\\ \n')
+            f.write(str(year_total[0]) + ' & \\$' + str(round(total[0], 2)) + ' & \\$' + str(round(total[1], 2)) + ' & \\$' + str(round(total[2], 2)) + ' & ' + str(round(total[3], 2)) + ' \\\\ \n')
             final_tally = (final_tally[0]+total[0], final_tally[1]+total[1], final_tally[2]+total[2], final_tally[3]+total[3])
 
         f.write('\\hline  \n')
-        f.write('Total: & ' + str(round(final_tally[0], 2)) + ' & ' + str(round(final_tally[1], 2)) + ' & ' + str(round(final_tally[2], 2)) + ' & ' + str(round(final_tally[3], 2)) + ' \\\\ \n')
+        f.write('Total: & \\$' + str(round(final_tally[0], 2)) + ' & \\$' + str(round(final_tally[1], 2)) + ' & \\$' + str(round(final_tally[2], 2)) + ' & ' + str(round(final_tally[3], 2)) + ' \\\\ \n')
         f.write('\\hline  \n')
         f.write('\\end{tabular}\n')
         f.write('\\end{table}\n')
-        f.write('\\end{center}\n')
         f.write('\\end{document}\n')
     return True
 
