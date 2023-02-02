@@ -83,7 +83,7 @@ def write_latex(all_inventory: [Inventory_Item]) -> bool:
         final_tally = (0, 0, 0, 0)
         for year_total in total_per_year.items():
             total = year_total[1]
-            f.write(str(year_total[0]) + ' & \\$' + str(round(total[0], 2)) + ' & \\$' + str(round(total[1], 2)) + ' & \\$' + str(round(total[2], 2)) + ' & ' + str(round(total[3], 2)) + ' \\\\ \n')
+            f.write('20' + str(year_total[0]) + ' & \\$' + str(round(total[0], 2)) + ' & \\$' + str(round(total[1], 2)) + ' & \\$' + str(round(total[2], 2)) + ' & ' + str(round(total[3], 2)) + ' \\\\ \n')
             final_tally = (final_tally[0]+total[0], final_tally[1]+total[1], final_tally[2]+total[2], final_tally[3]+total[3])
 
         f.write('\\hline  \n')
