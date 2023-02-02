@@ -1,4 +1,5 @@
 import csv
+from bs4 import BeautifulSoup
 from Inventory_Item import Inventory_Item
 
 
@@ -20,7 +21,8 @@ def read_inventory_csv() ->[Inventory_Item]:
                 new_item.price = row[3]
                 new_item.status = row[4]
                 new_item.image_url = row[5]
-                new_item.description = row[6]
+                soup = BeautifulSoup(row[6], features="html.parser")
+                new_item.description = soup.get_text('\n\n')
                 new_item.commission_rate = row[7]
                 new_item.commission_amount = row[8]
                 new_item.received_date = row[9]
