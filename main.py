@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from read_inventory_csv import read_inventory_csv
 from grab_images import grab_images
 from write_latex import write_latex
@@ -13,7 +15,11 @@ def main():
     else:
         grab_site_sku_images(inventory)
 
-    write_latex(inventory)
+    #sort inventory by date
+    inventory_commision = [item for item in inventory if item.sale_date is not '']
+    inventory_commision.sort(key=lambda item: datetime.strptime(item.sale_date, "%m/%d/%Y"), reverse=True)
+
+    write_latex(inventory_commision)
 
 
 if __name__ == "__main__":
